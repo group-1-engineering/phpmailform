@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 Tested working with PHP5.4 and above (including PHP 7 )
 
  */
-require_once './vendor/autoload.php';
+require_once '.autoload.php';
 
 use FormGuide\Handlx\FormHandler;
 
@@ -21,6 +21,6 @@ $validator->field('Message')->maxLength(6000);
 
 
 
-$pp->sendEmailTo('laura@pxos.org'); // ← Your email here
+$pp->sendEmailTo = "laura@pxos.org"; // ← Your email here
 
 echo $pp->process($_POST);
