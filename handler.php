@@ -1,26 +1,15 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-/*
-Tested working with PHP5.4 and above (including PHP 7 )
 
- */
-require_once '.autoload.php';
+if (isset($_POST['sumit'])){
+$name = $_POST['name'];
+$subject = $_POST['subject'];
+$mailFrom = $_POST['mail'];
+$message = $_POST['message'];
 
-use FormGuide\Handlx\FormHandler;
+$mailTo = "laura@pxos.org";
+$headers = "From: ".$mailFrom;
+$txt = "You have recieved an e-mail from ".$name.".\n\n".$message;
 
-
-$pp = new FormHandler();
-
-$validator = $pp->getValidator();
-$validator->fields(['Name','Email'])->areRequired()->maxLength(50);
-$validator->field('Email')->isEmail();
-$validator->field('Message')->maxLength(6000);
-
-
-
-
-$pp->sendEmailTo('laura@pxos.org'); // ← Your email here
-
-echo $pp->process($_POST);
+mail($mailTo, $subject, $txt, $headers);
+header("Location: index.php?mailsend");
+}
